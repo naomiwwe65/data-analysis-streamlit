@@ -117,7 +117,7 @@ st.plotly_chart(fig2, use_container_width=True)
 
 # Monthly Sales Trend
 st.subheader("Monthly Sales Trend")
-monthly_sales = filtered_df.groupby(filtered_df['invoice_date'].dt.to_period('M'))['total_price'].sum().reset_index()
+monthly_sales = filtered_df.groupby(filtered_df['invoice_date'].dt.to_period('M'), observed=False)['total_price'].sum().reset_index()
 monthly_sales['invoice_date'] = monthly_sales['invoice_date'].astype(str)
 fig3 = px.line(monthly_sales, x='invoice_date', y='total_price', title="Monthly Sales Over Time",
                labels={'total_price': 'Sales ($)', 'invoice_date': 'Month'})
